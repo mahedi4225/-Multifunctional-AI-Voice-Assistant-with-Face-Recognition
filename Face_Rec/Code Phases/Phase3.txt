@@ -1,0 +1,205 @@
+import cv2
+import time
+import matplotlib.pyplot as plt
+import numpy as np
+import torch
+import torchvision.transforms as transforms
+from torchvision import models
+from PIL import Image
+import face_recognition
+import dlib
+
+# Load the Haar cascade file for face detection
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
+
+# Create a HOG face detector using dlib
+face_detector = dlib.get_frontal_face_detector()
+
+# Create a shape predictor using the pre-trained model
+predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
+
+# Function to capture and save the reference image
+def capture_reference_image(username):
+    # Open the default camera
+    cap = cv2.VideoCapture(0)
+
+    # Allow time for the camera to stabilize
+    time.sleep(2)
+
+    # Read a frame from the camera
+    ret, frame = cap.read()
+
+    # Detect faces in the frame
+    faces = face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+
+    if len(faces) == 0:
+        print("No face detected in the reference image. Please try again.")
+        cap.release()
+        cv2.destroyAllWindows()
+        return
+
+    # Select the largest face as the region of interest
+    x, y, w, h = max(faces, key=lambda f: f[2] * f[3])
+
+    # Extract the face region from the frame
+    face_roi = frame[y:y+h, x:x+w]
+
+    # Convert the face region to PIL Image
+    reference_image = Image.fromarray(cv2.cvtColor(face_roi, cv2.COLOR_BGR2RGB))
+
+    # Display the face region
+    plt.imshow(reference_image)
+    plt.title("Capture Reference Image")
+    plt.axis("off")
+    plt.show()
+
+    # Save the face region as a reference image with the username
+    reference_image.save(f"{username}_reference_image.jpg")
+
+    # Release the camera and close the window
+    cap.release()
+    cv2.destroyAllWindows()
+
+def align_face(face):
+    # Convert the face to grayscale
+    face_gray = cv2.cvtColor(face, cv2.COLOR_BGR2GRAY)
+
+    # Detect facial landmarks using the shape predictor model
+    landmarks = predictor(face_gray, dlib.rectangle(0, 0, face_gray.shape[1], face_gray.shape[0]))
+
+    # Align the face using the facial landmarks
+    aligned_face = dlib.get_face_chip(face, landmarks)
+
+    return aligned_face
+
+def compare_images(username):
+    # Load the reference image
+    reference_image = face_recognition.load_image_file(f"{username}_reference_image.jpg")
+    reference_encoding = face_recognition.face_encodings(reference_image)[0]
+
+    # Open the default camera
+    cap = cv2.VideoCapture(0)
+
+    # Allow time for the camera to stabilize
+    time.sleep(2)
+
+    # Initialize the retry counter
+    retry_count = 0
+
+    while retry_count < 3:
+        # Read a frame from the camera
+        ret, frame = cap.read()
+
+        # Detect faces in the frame
+        faces = face_cascade.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5, minSize=(30, 30))
+
+        if len(faces) == 0:
+            print("No face detected in the login image. Please try again.")
+            continue
+
+        # Select the largest face as the region of interest
+        x, y, w, h = max(faces, key=lambda f: f[2] * f[3])
+
+        # Extract the face region from the frame
+        face_roi = frame[y:y+h, x:x+w]
+
+        # Convert the face region to PIL Image
+        login_image = Image.fromarray(cv2.cvtColor(face_roi, cv2.COLOR_BGR2RGB))
+
+        # Convert the PIL Image to numpy array
+        login_image_np = np.array(login_image)
+
+        # Detect landmarks on the login image
+        landmarks = face_detector(login_image_np)
+
+        if len(landmarks) == 0:
+            print("No face landmarks detected in the login image. Please try again.")
+            continue
+
+        # Align the face using landmarks
+        aligned_face = align_face(login_image_np)
+
+        # Encode the aligned face
+        login_encoding = face_recognition.face_encodings(aligned_face)[0]
+
+        # Calculate the Euclidean distance between the encodings
+        distance = np.linalg.norm(login_encoding - reference_encoding)
+
+        # Print the matching score
+        print(f"Matching Score: {distance}")
+
+        # Release the camera and close the window
+        cap.release()
+        cv2.destroyAllWindows()
+
+        # Display the reference image and login image side by side
+        fig, axes = plt.subplots(1, 2)
+        axes[0].imshow(reference_image)
+        axes[0].set_title("Reference Image")
+        axes[0].axis("off")
+        axes[1].imshow(login_image)
+        axes[1].set_title("Login Image")
+        axes[1].axis("off")
+        plt.show()
+
+        # Check if the faces match
+        if distance < 0.35:  # Adjust the threshold as needed
+            return "Login Successful"
+        else:
+            retry_count += 1
+            print(f"Face Not Matched. Retry {retry_count}")
+            time.sleep(2)
+            cap = cv2.VideoCapture(0)  # Reopen the camera
+
+    # Retry limit reached, return to the main menu
+    return "Retry limit exceeded. Returning to the main menu."
+
+# Signup function
+def signup():
+    # Get the username from the user
+    username = input("Enter your username: ")
+
+    # Check if the username already exists
+    if is_username_taken(username):
+        print("Username already taken. Please choose a different username.")
+        return
+
+    # Capture and save the reference image with the username
+    capture_reference_image(username)
+    print("Signup Successful")
+
+# Login function
+def login():
+    # Get the username from the user
+    username = input("Enter your username: ")
+
+    # Check if the username exists
+    if not is_username_taken(username):
+        print("Username not correct. Returning to the main menu.")
+        return
+
+    # Compare the reference image with a new image for the given username
+    result = compare_images(username)
+    print(result)
+
+# Check if the username is already taken
+def is_username_taken(username):
+    # Check if the reference image file exists for the given username
+    return cv2.imread(f"{username}_reference_image.jpg") is not None
+
+# Main program loop
+while True:
+    print("1. Signup")
+    print("2. Login")
+    print("3. Exit")
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        signup()
+    elif choice == "2":
+        login()
+    elif choice == "3":
+        break
+    else:
+        print("Invalid choice. Please try again.")
+    print()

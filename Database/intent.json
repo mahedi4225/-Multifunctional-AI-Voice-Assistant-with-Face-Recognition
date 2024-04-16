@@ -1,0 +1,199 @@
+{
+    "intents": [
+        {
+            "tag": "greeting",
+            "patterns": [
+                "Hi",
+                "Hello",
+                "Hey Jarvis",
+                "Good morning",
+                "Good afternoon",
+                "Good evening"
+            ],
+            "responses": [
+                "Hello! How can I assist you today?",
+                "Hi there! How may I help you?",
+                "Hey! How can I be of service?"
+            ]
+        },
+        {
+            "tag": "farewell",
+            "patterns": [
+                "Goodbye",
+                "Bye",
+                "See you later",
+                "Take care"
+            ],
+            "responses": [
+                "Goodbye! Have a great day!",
+                "Bye! Take care and feel free to reach out anytime.",
+                "See you later! Take care and stay safe."
+            ]
+        },
+        {
+            "tag": "thanks",
+            "patterns": [
+                "Thank you",
+                "Thanks",
+                "Appreciate it"
+            ],
+            "responses": [
+                "You're welcome! Happy to help.",
+                "You're welcome! It's my pleasure.",
+                "No problem! Let me know if there's anything else I can do for you."
+            ]
+        },
+        {
+            "tag": "basic_information",
+            "patterns": [
+                "What is your name?",
+                "Who are you?",
+                "Tell me about yourself"
+            ],
+            "responses": [
+                "I am Jarvis, your personal voice assistant. I'm here to assist you with any questions or tasks you have.",
+                "My name is Jarvis. I'm an AI voice assistant designed to help you with various tasks and provide information."
+            ]
+        },
+        {
+            "tag": "weather",
+            "patterns": [
+                "What's the weather like today?",
+                "Will it rain tomorrow?",
+                "How's the weather in [city]?"
+            ],
+            "responses": [
+                "Let me check the weather for you. Please wait a moment.",
+                "Sure, I can provide you with weather information. Which city are you interested in?"
+            ]
+        },
+        {
+            "tag": "news",
+            "patterns": [
+                "What's the latest news?",
+                "Tell me the top headlines",
+                "Any news updates?"
+            ],
+            "responses": [
+                "Let me fetch the latest news for you. Please give me a moment.",
+                "Sure, I can provide you with the latest news. Just a moment while I retrieve the information."
+            ]
+        },
+        {
+            "tag": "joke",
+            "patterns": [
+                "Tell me a joke",
+                "Do you know any jokes?",
+                "I could use a laugh"
+            ],
+            "responses": [
+                "Sure, here's a joke for you: [insert joke]",
+                "Why did the computer go to the doctor? Because it had a virus! Hope that brought a smile to your face!"
+            ]
+        },
+        {
+            "tag": "time",
+            "patterns": [
+                "What's the current time?",
+                "Can you tell me the time?",
+                "What time is it?"
+            ],
+            "responses": [
+                "It is [current time].",
+                "The current time is [current time]."
+            ]
+        },
+        {
+            "tag": "help",
+            "patterns": [
+                "I need help",
+                "Can you assist me?",
+                "I'm having trouble"
+            ],
+            "responses": [
+                "Of course! I'm here to help. Please let me know what you need assistance with.",
+                "I'm here to assist you. What seems to be the problem?"
+            ]
+        },
+        {
+            "tag": "history",
+            "patterns": [
+                "Tell me about the history of [topic]",
+                "What is the historical background of [topic]?",
+                "Can you provide information on the origins of [topic]?"
+            ],
+            "responses": [
+                "Let me find the relevant information about the history of [topic]. Please wait a moment.",
+                "Sure, I can provide you with the historical background of [topic]. Let me fetch the details for you."
+            ]
+        },
+        {
+            "tag": "overview",
+            "patterns": [
+                "What is [topic]?",
+                "Tell me about [topic]",
+                "Can you provide an overview of [topic]?"
+            ],
+            "responses": [
+                "Certainly! Let me gather the necessary information about [topic]. Please give me a moment.",
+                "Sure, I can provide you with an overview of [topic]. Let me fetch the details for you."
+            ]
+        },
+        {
+            "tag": "description",
+            "patterns": [
+                "Describe [topic]",
+                "What are the key features of [topic]?",
+                "Tell me about the characteristics of [topic]"
+            ],
+            "responses": [
+                "Let me search for the description and key features of [topic]. Please wait a moment.",
+                "Sure, I can provide you with a description and the key features of [topic]. Let me fetch the details for you."
+            ]
+        },
+        {
+            "tag": "notable_figures",
+            "patterns": [
+                "Who are some notable figures in [topic]?",
+                "Can you provide information about famous individuals in [topic]?",
+                "Tell me about the prominent personalities associated with [topic]"
+            ],
+            "responses": [
+                "Let me find the information about notable figures in [topic]. Please wait a moment.",
+                "Sure, I can provide you with details about famous individuals associated with [topic]. Let me fetch the information for you."
+            ]
+        },
+        {
+            "tag": "related_topics",
+            "patterns": [
+                "What are some related topics to [topic]?",
+                "Can you provide information about related subjects to [topic]?",
+                "Tell me about other relevant areas connected to [topic]"
+            ],
+            "responses": [
+                "Let me search for related topics to [topic]. Please wait a moment.",
+                "Sure, I can provide you with details about other relevant subjects connected to [topic]. Let me fetch the information for you."
+            ]
+        },
+        {
+            "tag": "references",
+            "patterns": [
+                "Can you provide references for [topic]?",
+                "Tell me about the sources of information for [topic]",
+                "Where can I find more information about [topic]?"
+            ],
+            "responses": [
+                "Let me find the references for [topic]. Please wait a moment.",
+                "Sure, I can provide you with references and sources of information for [topic]. Let me fetch the details for you."
+            ]
+        },
+        {
+            "tag": "unknown",
+            "patterns": [],
+            "responses": [
+                "I'm sorry, I didn't quite understand that. Can you please rephrase your statement or question?",
+                "I apologize, but I'm unable to comprehend your request. Could you provide more context or try asking in a different way?"
+            ]
+        }
+    ]
+}
