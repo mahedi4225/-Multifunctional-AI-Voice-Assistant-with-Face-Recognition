@@ -7,15 +7,25 @@ Copyright © 2023 Mahmud Hasan Mahedi, Md. Sohel Alam, Nafiuzzaman, Md. Touhidur
 # Abstract
  Our proposed AI voice assistant amalgamates cutting-edge natural language processing with facial recognition capabilities, with the explicit aim of augmenting user experiences and expanding the system's multifaceted applications. Diverging from extant voice-centric AI frameworks exemplified by Siri, Alexa, and Google Assistant, our innovative solution conscientiously prioritizes the convergence of both voice and facial modalities. Conceived to cater to a heterogeneous user demographic, our voice assistant transcends mundane operational paradigms, addressing the needs of professionals engaged in email management, individuals avidly pursuing entertainment and information, and those contending with visual impairments. Through the seamless incorporation of facial recognition, our system not only fortifies security measures but also elevates the realms of personalization and accessibility. In succinct summation, our AI voice assistant proffers an all-encompassing solution, strategically harnessing the synergies of voice and facial recognition technologies to ameliorate quotidian tasks, fortify accessibility, and engender inclusivity within the technological  millennium.
 
-#Images
+# Images
+
+Data Flow Digram Level 0
 
 ![Data Flow Digram Level 0](https://github.com/mahedi4225/-Multifunctional-AI-Voice-Assistant-with-Face-Recognition/assets/114085625/e9dedd4c-15fe-437c-b8aa-32371eeac9b1)
 
+Data Flow Digram Level 1
+
 ![Data Flow Digram Level 1](https://github.com/mahedi4225/-Multifunctional-AI-Voice-Assistant-with-Face-Recognition/assets/114085625/7ebdf20b-ef68-4dd9-8410-3090e9a3df26)
+
+ER Diagram
 
 ![ER Diagram](https://github.com/mahedi4225/-Multifunctional-AI-Voice-Assistant-with-Face-Recognition/assets/114085625/6361de67-ab30-471e-a6f7-6b4e8aa0be2f)
 
+Flow Chart
+
 ![Flow Chart](https://github.com/mahedi4225/-Multifunctional-AI-Voice-Assistant-with-Face-Recognition/assets/114085625/8a33ca09-4a7f-43de-8871-d9628e3cf61d)
+
+Use Case Diagram
 
 ![Use Case Diagram](https://github.com/mahedi4225/-Multifunctional-AI-Voice-Assistant-with-Face-Recognition/assets/114085625/cd852e55-03bc-4f79-8d4c-e474fc96e57d)
 
